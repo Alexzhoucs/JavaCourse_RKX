@@ -1,4 +1,3 @@
-
 public class Matrix
 {
     public static void main(String args[])
@@ -10,3 +9,4 @@ public class Matrix
 }
 
 //行列式： 方法：求值
+//分数：整数构造/分数构造  成员：求值/打印

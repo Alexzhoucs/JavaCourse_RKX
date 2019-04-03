@@ -86,7 +86,10 @@ public class Fraction
 
 	public String toString()
 	{
-		return numerator + "/" + denominator;
+		if(denominator == 1)
+			return numerator + "";
+		else
+			return numerator + "/" + denominator;
 	}
 
 }

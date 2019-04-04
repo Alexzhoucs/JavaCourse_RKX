@@ -1,5 +1,13 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.io.IOException;
+
 public class Matrix
 {
+    Fraction[] f;
+
+
     public static void main(String args[])
     {
 //        Fraction a = new Fraction(3);
@@ -10,6 +18,27 @@ public class Matrix
 //        System.out.println(Fraction.sub(a,b));
 //        System.out.println(Fraction.sub(b,a));
 
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Input an integer.");
+        int a = sc.nextInt();
+        System.out.println(a);
+
+        //输入方法
+
+        File file = new File("1.txt");
+        try
+        {
+            Scanner f = new Scanner(file);
+            while (f.hasNext())
+            {
+                int data = f.nextInt();
+                System.out.println(data);
+            }
+            f.close();
+        } catch (FileNotFoundException e)
+        {
+            System.out.println("ERROR: cannot find file.");
+        }
 
 
     }

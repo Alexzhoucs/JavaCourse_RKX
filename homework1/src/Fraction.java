@@ -91,5 +91,4 @@ public class Fraction
 		else
 			return numerator + "/" + denominator;
 	}
-
 }

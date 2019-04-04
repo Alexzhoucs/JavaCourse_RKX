@@ -3,6 +3,11 @@ public class Fraction
 	private long denominator;
 	private long numerator;
 
+	public long getDenominator()
+	{
+		return denominator;
+	}
+
 	public Fraction(long numerator)
 	{
 		this.numerator = numerator;

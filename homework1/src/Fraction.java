@@ -8,6 +8,11 @@ public class Fraction
 		return denominator;
 	}
 
+	public long getNumerator()
+	{
+		return numerator;
+	}
+
 	public Fraction(long numerator)
 	{
 		this.numerator = numerator;

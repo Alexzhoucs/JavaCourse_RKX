@@ -19,60 +19,6 @@ public class Matrix
 		this.f = a;
 	}
 
-/*
-	public static void main(String args[])
-	{
-//        Fraction a = new Fraction(3);
-//        System.out.println(a);
-//        Fraction b = new Fraction(2,3);
-//        System.out.println(a +"\t" + b + "\t" + a.value() + "\t" + b.value());
-//        System.out.println(Fraction.add(a,b));
-//        System.out.println(Fraction.sub(a,b));
-//        System.out.println(Fraction.sub(b,a));
-
-//
-//		//键盘输入
-//        Scanner sc = new Scanner(System.in);
-//        System.out.println("Input an integer.");
-//        int a = sc.nextInt();
-//        System.out.println(a);
-//
-//        //文件输入方法
-//
-//        File file = new File("1.txt");
-//        try
-//        {
-//            Scanner f = new Scanner(file);
-//            while (f.hasNext())
-//            {
-//                int data = f.nextInt();
-//                System.out.println(data);
-//            }
-//            f.close();
-//        } catch (FileNotFoundException e)
-//        {
-//            System.out.println("ERROR: cannot find file.");
-//        }
-
-
-		long[][] data = new long[3][3];
-		data[0][0] = 1;
-		data[0][1] = 1;
-		data[0][2] = 2;
-		data[1][0] = 2;
-		data[1][1] = 6;
-		data[1][2] = 1;
-		data[2][0] = 3;
-		data[2][1] = 4;
-		data[2][2] = 5;
-
-		Matrix a = new Matrix(data, data.length);
-		System.out.println(a);
-		Matrix inverse = a.findInverse();
-		System.out.println(inverse);
-	}
-*/
-
 	public Matrix findInverse()
 	{
 		boolean intFlag = this.testInt();

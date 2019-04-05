@@ -13,6 +13,7 @@ public class Determinant
 	public Determinant(Fraction[][] f)
 	{
 		this.order = f.length;
+		this.data = new long[order][order];
 		for (int i = 0; i < order; i++)
 			for (int j = 0; j < order; j++)
 				this.data[i][j] = f[i][j].getNumerator();
@@ -24,31 +25,32 @@ public class Determinant
 
 		long value = 0;
 
-		for (int i = 0; i < order; i++)
-			for (int j = 0; j < order; j++)
+		//for (int i = 0; i < order; i++)
+		int i = 1;
+		for (int j = 0; j < order; j++)
+		{
+			long[][] cofactor = new long[order - 1][order - 1];
+			for (int m = 0, p = 0; p < order; m++, p++)        //cofactor 赋值
 			{
-				long[][] cofactor = new long[order - 1][order - 1];
-				for (int m = 0, p = 0; p < order; m++, p++)        //cofactor 赋值
+				if (p == i)
 				{
-					if (p == i)
+					m--;
+					continue;
+				}
+				for (int n = 0, q = 0; q < order; n++, q++)
+				{
+					if (q == j)
 					{
-						m--;
+						n--;
 						continue;
 					}
-					for (int n = 0, q = 0; q < order; n++, q++)
-					{
-						if (q == j)
-						{
-							n--;
-							continue;
-						}
-						cofactor[m][n] = data[p][q];
-					}
+					cofactor[m][n] = data[p][q];
 				}
-				Determinant A = new Determinant(cofactor);
-
-				value += data[i][j] * (A.value() * (long) Math.pow((double) (-1), (double) (i + j)));
 			}
+			Determinant A = new Determinant(cofactor);
+
+			value += data[i][j] * (A.value() * (long) Math.pow((double) (-1), (double) (i + j)));
+		}
 
 		return value;
 	}

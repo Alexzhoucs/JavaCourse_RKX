@@ -1,14 +1,8 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.rmi.MarshalException;
-import java.util.Scanner;
-import java.io.IOException;
-//import java.math.*;
 
 public class Matrix
 {
-	Fraction[][] f;
-	int order;
+	private Fraction[][] f;
+	private int order;
 
 	public Matrix(long[][] a, int order)
 	{
@@ -25,6 +19,7 @@ public class Matrix
 		this.f = a;
 	}
 
+/*
 	public static void main(String args[])
 	{
 //        Fraction a = new Fraction(3);
@@ -60,7 +55,23 @@ public class Matrix
 //        }
 
 
+		long[][] data = new long[3][3];
+		data[0][0] = 1;
+		data[0][1] = 1;
+		data[0][2] = 2;
+		data[1][0] = 2;
+		data[1][1] = 6;
+		data[1][2] = 1;
+		data[2][0] = 3;
+		data[2][1] = 4;
+		data[2][2] = 5;
+
+		Matrix a = new Matrix(data, data.length);
+		System.out.println(a);
+		Matrix inverse = a.findInverse();
+		System.out.println(inverse);
 	}
+*/
 
 	public Matrix findInverse()
 	{
@@ -73,6 +84,8 @@ public class Matrix
 
 		Matrix adjoint = this.findAdjoint();
 		Determinant det = new Determinant(f);
+		long temp = det.value();
+//		System.out.println(temp);
 		adjoint.multiFraction(new Fraction(1, det.value()));
 		//	求行列式： new 行列式；行列式.value();
 
@@ -130,15 +143,39 @@ public class Matrix
 
 	private boolean testInt()        //若均为整数则返回true
 	{
-		boolean flag = true;
+//		boolean flag = true;
 		for (int i = 0; i < order; i++)
 			for (int j = 0; j < order; j++)
-				if (f[i][j].getDenominator() != 1)
-				{
-					flag = false;
-					return flag;
-				}
-		return flag;
+				if (f[i][j].getDenominator() != 1) return false;
+
+		return true;
+	}
+
+	public String toFile()
+	{
+		StringBuffer value = new StringBuffer("");
+		for (int i = 0; i < order; i++)
+		{
+			for (int j = 0; j < order; j++)
+				value.append(f[i][j].toString()).append("\t");
+//				value = value + f[i][j].toString() + "\t";
+			value.append("\r\n");
+		}
+		return value.toString();
+	}
+
+	@Override
+	public String toString()
+	{
+		StringBuffer value = new StringBuffer("");
+		for (int i = 0; i < order; i++)
+		{
+			for (int j = 0; j < order; j++)
+				value.append(f[i][j].toString()).append("\t\t");
+//				value = value + f[i][j].toString() + "\t";
+			value.append("\n");
+		}
+		return value.toString();
 	}
 	//矩阵： 方法：求行列式、求逆矩阵、求伴随矩阵    构造方法：文件输入 + 检查（private）
 	//main： 输入矩阵、检查并求出阶数、求逆矩阵

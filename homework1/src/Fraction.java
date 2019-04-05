@@ -24,7 +24,7 @@ public class Fraction
 		this.denominator = denominator;
 		this.numerator = numerator;
 		int err = this.check();
-		System.out.println("New Fraction Checked; ERROR Code: " + err);
+		//System.out.println("New Fraction Checked; ERROR Code: " + err);
 	}
 
 	public static Fraction add(Fraction a, Fraction b)
@@ -94,11 +94,12 @@ public class Fraction
 		return ((double) numerator / (double) denominator);
 	}
 
+	@Override
 	public String toString()
 	{
-		if(denominator == 1)
-			return numerator + "";
-		else
-			return numerator + "/" + denominator;
+		String value = "";
+		if (numerator >= 0) value += " ";
+		if (denominator == 1) return value + numerator;
+		else return value + numerator + "/" + denominator;
 	}
 }

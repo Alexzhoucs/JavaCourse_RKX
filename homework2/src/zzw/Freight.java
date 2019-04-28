@@ -54,14 +54,16 @@ public class Freight
 		{
 			if (data.length <= 4)
 			{
-				for (int i = 0; i < data.length; i++)
-					this.cargo[i] = data[i];
+//				for (int i = 0; i < data.length; i++)
+//					this.cargo[i] = data[i];
+				System.arraycopy(data, 0, this.cargo, 0, data.length);
 				this.weight = data.length;
 			} else
 			{
 				this.weight = 4;
-				for (int i = 0; i < 4; i++)
-					this.cargo[i] = data[i];
+//				for (int i = 0; i < 4; i++)
+//					this.cargo[i] = data[i];
+				System.arraycopy(data, 0, this.cargo, 0, 4);
 			}
 		}
 
@@ -73,7 +75,6 @@ public class Freight
 //			return this;
 			if (n == 1) return;
 			this.next = new Car(n - 1);
-			return;
 		}
 
 	}

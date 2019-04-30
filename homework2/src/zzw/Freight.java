@@ -1,6 +1,5 @@
 package zzw;
 
-import javax.net.ssl.SSLContext;
 import java.util.Scanner;
 import java.lang.Exception;
 import java.util.InputMismatchException;
@@ -30,13 +29,14 @@ public class Freight
 	public void load()
 	{
 		// input the destination and the number.
-		boolean inputFlag = false;
 		Scanner sc = new Scanner(System.in);
+		boolean inputFlag;
 		char destination;
 		int mount = 0;
 		System.out.print("请输入货物目的地：");
 		destination = sc.next().toCharArray()[0];
 		System.out.println("读取目的地为：" + destination);        //继续IO
+
 
 		System.out.print("请输入货物数量：");
 		do

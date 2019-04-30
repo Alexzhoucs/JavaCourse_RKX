@@ -13,7 +13,7 @@ public class Freight
 	public Freight()
 	{
 		//char a[] = {'0','0','0','0'};
-		this.firstCar = new Car(5);
+		this.firstCar = new Car(1);
 		this.length = 5;
 	}
 
@@ -22,6 +22,8 @@ public class Freight
 		Freight f = new Freight();
 		System.out.println(f);
 		f.load();
+		f.load();
+		System.out.println(f);
 
 	}
 
@@ -56,26 +58,110 @@ public class Freight
 				System.out.print("请重新输入：");
 				inputFlag = true;
 			}
-		} while (inputFlag);
-		System.out.println(mount);        //交互完成
+		} while (inputFlag);                    //交互完成
+		//System.out.println(mount);
 
+		if (mount >= 4)                            //处理整车负载
+		{
+			boolean findFlag = false;
+			char cargo[] = {destination, destination, destination, destination};
+			Car c = firstCar;
+			while (!findFlag)                            //查找空车
+			{
+				if (c.getWeight() == 0)
+				{
+					try
+					{
+						c.add(cargo);        //todo: add try block
+					} catch (Exception e)
+					{
+						System.out.println(e.getMessage());
+					}
+					findFlag = true;
+				}
+				if (c.getNext() == null) break;
+				c = c.getNext();
+			}
 
+			if (!findFlag)                                //无空车，新建车厢
+			{
+				Car newCar = new Car(cargo);
+				c.setNext(newCar);
+				length++;
+			}
+			mount -= 4;
+		}
+
+		//todo: 零散放入
+		try
+		{
+			Car c = firstCar;
+			while (mount > 0)
+			{
+				if (c.getWeight() < 4)                //找到有空余车厢
+				{
+					if (mount <= (4 - c.getWeight()))
+					{
+						char cargo[] = new char[mount];
+						for (int i = 0; i < mount; i++)
+							cargo[i] = destination;
+						c.add(cargo);
+						mount = 0;
+					} else
+					{
+						int sum = 4 - c.getWeight();
+						mount -= sum;
+						char cargo[] = new char[sum];
+						for (int i = 0; i < sum; i++)
+							cargo[i] = destination;
+						c.add(cargo);
+					}
+				}
+				if (c.getNext() == null&&mount > 0)
+				{
+					char cargo[] = new char[mount];
+					for (int i = 0; i < mount; i++)
+						cargo[i] = destination;
+					Car newCar = new Car(cargo);
+					c.setNext(newCar);
+					length++;
+					mount = 0;
+				}
+				c = c.getNext();
+			}
+		} catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		System.out.println("已成功装载货物！\n 目的地：\t" + destination);
 	}
 
 	@Override
 	public String toString()        //need to be completed
 	{
-		String result = "Length: ";
-		result += this.length;
-		return result;
+		int step = 0;
+		Car c = firstCar;
+		StringBuffer result = new StringBuffer("Freight length: \t");
+		result.append(this.length);
+		result.append('\n');
+//		while (c != null)
+//		{
+//			step++;
+//			result.append("\nCar ").append(step).append(" :\t");
+//			for (int i = 0; i < c.getWeight(); i++)
+//				result.append(c.cargo[i]).append('\t');
+//			c.setNext(c.getNext());
+//		}
+
+		return result.toString();
 	}
 
 	public class Car
 	{
-		char cargo[] = {'0', '0', '0', '0'};
-		int weight = 0;        //装了几个东西
+		private char cargo[] = {'0', '0', '0', '0'};
+		private int weight = 0;        //装了几个东西
 
-		Car next = null;
+		private Car next = null;
 
 
 		public Car(char data[])
@@ -93,6 +179,7 @@ public class Freight
 //					this.cargo[i] = data[i];
 				System.arraycopy(data, 0, this.cargo, 0, 4);
 			}
+			this.next = null;
 		}
 
 		public Car(int n)
@@ -105,5 +192,42 @@ public class Freight
 			this.next = new Car(n - 1);
 		}
 
+		public int getWeight()
+		{
+			return weight;
+		}
+
+		private void add(char[] data) throws Exception
+		{
+			// todo: add new data to cargo; throws exception when the data is too big.
+			if (data.length > (4 - this.weight)) {throw new Exception("ERROR in Freight - Car.add(char[]): 添加数据过大");}
+
+//			for(int i = 0;i < data.length;i++)
+//				cargo[weight + i] = data[i];
+			System.arraycopy(data, 0, cargo, weight, data.length);
+
+			weight += data.length;
+		}
+
+		public Car getNext()
+		{
+			return next;
+		}
+
+		public void setNext(Car next)
+		{
+			this.next = next;
+		}
+
+		public char[] getCargo()
+		{
+			return cargo;
+		}
+
+
+//		public void setCargo(char[] cargo)
+//		{
+//			this.cargo = cargo;
+//		}
 	}
 }

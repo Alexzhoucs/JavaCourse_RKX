@@ -12,14 +12,14 @@ public class Freight
 	public Freight()
 	{
 		//char a[] = {'0','0','0','0'};
-		this.firstCar = new Car(1);            //TODO: change patamater to 5
+		this.firstCar = new Car(1);
 		this.length = 5;
 	}
 
 	public static void main(String args[])
 	{
 		Freight f = new Freight();
-		//System.out.println(f);
+		System.out.println(f);
 		f.load();
 		f.load();
 		System.out.println(f);
@@ -136,7 +136,9 @@ public class Freight
 		System.out.println("已成功装载货物！\n 目的地：\t" + destination);
 	}
 
+<<<<<<< HEAD
 
+=======
 	@Override
 	public String toString()        //need to be completed
 	{
@@ -145,18 +147,18 @@ public class Freight
 		StringBuffer result = new StringBuffer("Freight length: \t");
 		result.append(this.length);
 		result.append('\n');
-		while (c != null)
-		{
-			step++;
-			result.append("\nCar ").append(step).append(" :\t");
-			for (int i = 0; i < c.getWeight(); i++)
-				result.append(c.cargo[i]).append('\t');
-			c = c.getNext();
-		}
+//		while (c != null)
+//		{
+//			step++;
+//			result.append("\nCar ").append(step).append(" :\t");
+//			for (int i = 0; i < c.getWeight(); i++)
+//				result.append(c.cargo[i]).append('\t');
+//			c.setNext(c.getNext());
+//		}
 
 		return result.toString();
 	}
-
+>>>>>>> parent of 80cf2b7... debugging
 
 	public class Car
 	{

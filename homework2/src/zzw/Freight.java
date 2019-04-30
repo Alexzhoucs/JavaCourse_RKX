@@ -20,10 +20,10 @@ public class Freight
 	public static void main(String args[])
 	{
 		Freight f = new Freight();
-		System.out.println(f);
+//		System.out.println(f);
 		f.load();
 		f.load();
-		System.out.println(f);
+//		System.out.println(f);
 
 	}
 
@@ -59,6 +59,7 @@ public class Freight
 				inputFlag = true;
 			}
 		} while (inputFlag);                    //交互完成
+		sc.close();
 		//System.out.println(mount);
 
 		if (mount >= 4)                            //处理整车负载
@@ -136,25 +137,40 @@ public class Freight
 		System.out.println("已成功装载货物！\n 目的地：\t" + destination);
 	}
 
-	@Override
+	/*@Override
 	public String toString()        //need to be completed
 	{
 		int step = 0;
 		Car c = firstCar;
-		StringBuffer result = new StringBuffer("Freight length: \t");
-		result.append(this.length);
-		result.append('\n');
+	//	StringBuffer result = new StringBuffer("");
+	//	result.append("Freight length: \t");
+		//result.append(this.length);
+		//result.append('\n');
 //		while (c != null)
 //		{
 //			step++;
-//			result.append("\nCar ").append(step).append(" :\t");
+//			result.append("\nCar ");
+//			result.append(step);
+//			result.append(" :\t");
 //			for (int i = 0; i < c.getWeight(); i++)
-//				result.append(c.cargo[i]).append('\t');
+//			{
+//				result.append(c.cargo[i]);
+//				result.append('\t');
+//			}
 //			c.setNext(c.getNext());
 //		}
+	//	result.append("\nCar ");
+//		result.append(step);
+//		result.append(" :\t");
+//		for (int i = 0; i < c.getWeight(); i++)
+//		{
+//			result.append(c.cargo[i]);
+//			result.append('\t');
+//		}
 
-		return result.toString();
-	}
+		String result = "test";
+		return result;
+	}*/
 
 	public class Car
 	{
@@ -219,10 +235,10 @@ public class Freight
 			this.next = next;
 		}
 
-		public char[] getCargo()
+	/*	public char[] getCargo()
 		{
 			return cargo;
-		}
+		}*/
 
 
 //		public void setCargo(char[] cargo)

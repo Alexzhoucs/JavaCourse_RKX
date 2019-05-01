@@ -12,7 +12,7 @@ public class Freight
 	public Freight()
 	{
 		//char a[] = {'0','0','0','0'};
-		this.firstCar = new Car(1);            //TODO: change the parameter to 5
+		this.firstCar = new Car(5);            //TODO: change the parameter to 5
 		this.length = 5;
 	}
 
@@ -23,6 +23,7 @@ public class Freight
 		f.load();
 		f.load();
 		System.out.println(f);
+		//todo： add UI function
 
 	}
 
@@ -72,7 +73,7 @@ public class Freight
 				{
 					try
 					{
-						c.add(cargo);        //todo: add try block
+						c.add(cargo);
 					} catch (Exception e)
 					{
 						System.out.println(e.getMessage());
@@ -92,7 +93,7 @@ public class Freight
 			mount -= 4;
 		}
 
-		//todo: 零散放入
+		// 零散放入
 		try
 		{
 			Car c = firstCar;
@@ -117,7 +118,7 @@ public class Freight
 						c.add(cargo);
 					}
 				}
-				if (c.getNext() == null&&mount > 0)
+				if (c.getNext() == null&&mount > 0)            //若全满则增加车厢
 				{
 					char cargo[] = new char[mount];
 					for (int i = 0; i < mount; i++)
@@ -134,6 +135,19 @@ public class Freight
 			System.out.println(e.getMessage());
 		}
 		System.out.println("已成功装载货物！\n 目的地：\t" + destination);
+	}
+
+	public void unload()
+	{
+		//todo: IO
+		Scanner sc = new Scanner(System.in);
+		System.out.println("开始卸载操作！");
+		System.out.print("请输入当前地址：");
+		char destination = sc.next().toCharArray()[0];
+		System.out.println("读取当前地址为：\t" + destination);
+
+		//todo: arithmetic
+
 	}
 
 
@@ -201,7 +215,7 @@ public class Freight
 
 		private void add(char[] data) throws Exception
 		{
-			// todo: add new data to cargo; throws exception when the data is too big.
+			// add new data to cargo; throws exception when the data is too big.
 			if (data.length > (4 - this.weight)) {throw new Exception("ERROR in Freight - Car.add(char[]): 添加数据过大");}
 
 //			for(int i = 0;i < data.length;i++)

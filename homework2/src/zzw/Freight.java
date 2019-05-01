@@ -23,6 +23,12 @@ public class Freight
 		f.load();
 		f.load();
 		System.out.println(f);
+		f.unload();
+		System.out.println(f);
+		f.load();
+		System.out.println(f);
+		f.unload();
+		System.out.println(f);
 		//todo： add UI function
 
 	}
@@ -147,7 +153,29 @@ public class Freight
 		System.out.println("读取当前地址为：\t" + destination);
 
 		//todo: arithmetic
-
+		Car c = firstCar;
+		Car last = null;
+		while (c != null)
+		{
+//			int delete = 0;
+//			for (int i = 0; i < c.getWeight(); i++)
+//				if (c.cargo[i] == destination)
+//				{
+//					c.cargo[i] = '0';
+//					delete++;
+//				}
+			if (c.sub(destination))
+			{
+				length--;
+				if (c == firstCar) firstCar = c.getNext();
+				else last.setNext(c.getNext());
+				//last does not change
+			} else
+			{
+				last = c;
+			}
+			c = c.getNext();
+		}
 	}
 
 
@@ -218,11 +246,39 @@ public class Freight
 			// add new data to cargo; throws exception when the data is too big.
 			if (data.length > (4 - this.weight)) {throw new Exception("ERROR in Freight - Car.add(char[]): 添加数据过大");}
 
+
 //			for(int i = 0;i < data.length;i++)
 //				cargo[weight + i] = data[i];
 			System.arraycopy(data, 0, cargo, weight, data.length);
 
 			weight += data.length;
+		}
+
+		private boolean sub(char destination)
+		{
+			//若删空则返回true
+			int delete = 0;
+			for (int i = 0; i < weight; i++)
+				if (cargo[i] == destination)
+				{
+					delete++;
+					cargo[i] = '0';
+				}
+
+			weight -= delete;
+			if (weight == 0) return true;
+
+
+			for (int i = 0; i < weight; i++)            // 整理cargo[] 使前 weight 个元素非空
+				if (cargo[i] == '0') for (int j = weight; j < 4; j++)
+					if (cargo[j] != '0')
+					{
+						cargo[i] = cargo[j];
+						cargo[j] = '0';
+						break;
+					}
+
+			return false;
 		}
 
 		public Car getNext()

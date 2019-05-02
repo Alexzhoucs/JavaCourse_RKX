@@ -9,16 +9,16 @@ public class Freight
 	private int length;
 	private Car firstCar;
 
-	public Freight()
+	Freight(int initialLength)
 	{
 		//char a[] = {'0','0','0','0'};
-		this.firstCar = new Car(5);            //TODO: change the parameter to 5
-		this.length = 5;
+		this.firstCar = new Car(initialLength);
+		this.length = initialLength;
 	}
 
-	public static void main(String args[])
+	/*public static void main(String args[])
 	{
-		Freight f = new Freight();
+		Freight f = new Freight(5);
 		//System.out.println(f);
 		f.load();
 		f.load();
@@ -31,15 +31,16 @@ public class Freight
 		System.out.println(f);
 		//todo： add UI function
 
-	}
+	}*/
 
-	public void load()
+	void load()
 	{
 		// input the destination and the number.
 		Scanner sc = new Scanner(System.in);
 		boolean inputFlag;
 		char destination;
 		int mount = 0;
+		System.out.println("开始装载操作！");
 		System.out.print("请输入货物目的地：");
 		destination = sc.next().toCharArray()[0];
 		System.out.println("读取目的地为：" + destination);        //继续IO
@@ -143,16 +144,16 @@ public class Freight
 		System.out.println("已成功装载货物！\n 目的地：\t" + destination);
 	}
 
-	public void unload()
+	void unload()
 	{
-		//todo: IO
+		//IO
 		Scanner sc = new Scanner(System.in);
 		System.out.println("开始卸载操作！");
 		System.out.print("请输入当前地址：");
 		char destination = sc.next().toCharArray()[0];
 		System.out.println("读取当前地址为：\t" + destination);
 
-		//todo: arithmetic
+		//arithmetic
 		Car c = firstCar;
 		Car last = null;
 		while (c != null)
@@ -166,9 +167,18 @@ public class Freight
 //				}
 			if (c.sub(destination))
 			{
-				length--;
-				if (c == firstCar) firstCar = c.getNext();
-				else last.setNext(c.getNext());
+				if (length > 1)        //最少留一节车厢
+				{
+					length--;
+					try
+					{
+						if (c == firstCar) firstCar = c.getNext();
+						else last.setNext(c.getNext());
+					} catch (NullPointerException e)
+					{
+						e.printStackTrace();
+					}
+				}
 				//last does not change
 			} else
 			{
@@ -184,7 +194,7 @@ public class Freight
 	{
 		int step = 0;
 		Car c = firstCar;
-		StringBuffer result = new StringBuffer("Freight length: \t");
+		StringBuilder result = new StringBuilder("Freight length: \t");
 		result.append(this.length);
 		result.append('\n');
 		while (c != null)
@@ -200,7 +210,7 @@ public class Freight
 	}
 
 
-	public class Car
+	private class Car
 	{
 		private char cargo[] = {'0', '0', '0', '0'};
 		private int weight = 0;        //装了几个东西
@@ -208,7 +218,7 @@ public class Freight
 		private Car next = null;
 
 
-		public Car(char data[])
+		private Car(char data[])
 		{
 			if (data.length <= 4)
 			{
@@ -226,17 +236,24 @@ public class Freight
 			this.next = null;
 		}
 
-		public Car(int n)
+		private Car(int n)
 		{
 //			if(n <= 0)
 //				return null;
 //			this.next = Car(n - 1);
 //			return this;
-			if (n == 1) return;
+			for (int i = 0; i < 4; i++)
+				cargo[i] = '0';
+			weight = 0;
+			if (n == 1)
+			{
+				this.next = null;
+				return;
+			}
 			this.next = new Car(n - 1);
 		}
 
-		public int getWeight()
+		private int getWeight()
 		{
 			return weight;
 		}
@@ -281,20 +298,22 @@ public class Freight
 			return false;
 		}
 
-		public Car getNext()
+		private Car getNext()
 		{
 			return next;
 		}
 
-		public void setNext(Car next)
+		private void setNext(Car next)
 		{
 			this.next = next;
 		}
 
+/*
 		public char[] getCargo()
 		{
 			return cargo;
 		}
+*/
 
 
 //		public void setCargo(char[] cargo)

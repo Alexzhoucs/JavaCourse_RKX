@@ -1,5 +1,7 @@
 package zzw;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.Scanner;
 import java.lang.Exception;
 import java.util.InputMismatchException;
@@ -15,23 +17,6 @@ public class Freight
 		this.firstCar = new Car(initialLength);
 		this.length = initialLength;
 	}
-
-	/*public static void main(String args[])
-	{
-		Freight f = new Freight(5);
-		//System.out.println(f);
-		f.load();
-		f.load();
-		System.out.println(f);
-		f.unload();
-		System.out.println(f);
-		f.load();
-		System.out.println(f);
-		f.unload();
-		System.out.println(f);
-		//todo： add UI function
-
-	}*/
 
 	void load()
 	{
@@ -158,13 +143,6 @@ public class Freight
 		Car last = null;
 		while (c != null)
 		{
-//			int delete = 0;
-//			for (int i = 0; i < c.getWeight(); i++)
-//				if (c.cargo[i] == destination)
-//				{
-//					c.cargo[i] = '0';
-//					delete++;
-//				}
 			if (c.sub(destination))
 			{
 				if (length > 1)        //最少留一节车厢
@@ -222,15 +200,11 @@ public class Freight
 		{
 			if (data.length <= 4)
 			{
-//				for (int i = 0; i < data.length; i++)
-//					this.cargo[i] = data[i];
 				System.arraycopy(data, 0, this.cargo, 0, data.length);
 				this.weight = data.length;
 			} else
 			{
 				this.weight = 4;
-//				for (int i = 0; i < 4; i++)
-//					this.cargo[i] = data[i];
 				System.arraycopy(data, 0, this.cargo, 0, 4);
 			}
 			this.next = null;
@@ -238,10 +212,6 @@ public class Freight
 
 		private Car(int n)
 		{
-//			if(n <= 0)
-//				return null;
-//			this.next = Car(n - 1);
-//			return this;
 			for (int i = 0; i < 4; i++)
 				cargo[i] = '0';
 			weight = 0;
@@ -253,6 +223,7 @@ public class Freight
 			this.next = new Car(n - 1);
 		}
 
+		@Contract(pure = true)
 		private int getWeight()
 		{
 			return weight;
@@ -298,6 +269,7 @@ public class Freight
 			return false;
 		}
 
+		@Contract(pure = true)
 		private Car getNext()
 		{
 			return next;
@@ -308,17 +280,5 @@ public class Freight
 			this.next = next;
 		}
 
-/*
-		public char[] getCargo()
-		{
-			return cargo;
-		}
-*/
-
-
-//		public void setCargo(char[] cargo)
-//		{
-//			this.cargo = cargo;
-//		}
 	}
 }

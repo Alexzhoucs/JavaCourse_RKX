@@ -13,6 +13,7 @@ public class Main
 		Scanner sc = new Scanner(System.in);
 		System.out.print("请输入矩阵阶数：\t");
 		order = sc.nextInt();
+		sc.close();
 //		System.out.println("order is " + order);
 		long[][] data = new long[order][order];
 
@@ -33,6 +34,7 @@ public class Main
 			if (i < order)
 			{
 				System.out.println("ERROR：文件行数比阶数小");
+				f.close();
 				return;
 			}
 

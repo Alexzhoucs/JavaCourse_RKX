@@ -31,6 +31,7 @@ public class Main
 				for (int j = 0; j < numbers.length&&j < order; j++)
 					data[i][j] = Long.parseLong(numbers[j]);
 			}
+			//TODO: 行元素不足
 			if (i < order)
 			{
 				System.out.println("ERROR：文件行数比阶数小");

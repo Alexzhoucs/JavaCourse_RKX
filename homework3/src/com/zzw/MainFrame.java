@@ -170,7 +170,6 @@ public class MainFrame extends JFrame
 			this.setPreferredSize(new Dimension(660, distance * f.getLength()));
 
 			super.paint(g);
-			//g.fillRect(0,0,700,6000);
 
 			System.out.println("f.length=" + f.getLength());
 

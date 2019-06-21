@@ -33,12 +33,17 @@ public class Controller implements ActionListener
 		if (e.getActionCommand().equals("load"))
 		{
 			System.out.println("load");
-
+			if (frame.getMount() < 0)        //读取错误，取消此次操作
+				return;
+			freight.load(frame.getCargoDestination(), frame.getMount());
 		} else if (e.getActionCommand().equals("unload"))
 		{
 			System.out.println("unload");
-
+			freight.unload(frame.getCargoLocation());
 		}
 
+		frame.setJtfNull();
+
+		frame.revalidate();
 	}
 }

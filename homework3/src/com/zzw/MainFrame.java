@@ -1,6 +1,5 @@
 package com.zzw;
 
-import com.zzw.Controller;
 import javax.swing.*;
 import java.awt.*;
 
@@ -14,6 +13,7 @@ public class MainFrame extends JFrame
 	private ScrollPane spl;
 	private JPanel jpnl;
 	private ScrollPane spr;
+	private PaintPanel ppr;
 
 	private JLabel destination = new JLabel("Destination:");
 	private JLabel mount = new JLabel("Mount         :");
@@ -22,6 +22,56 @@ public class MainFrame extends JFrame
 	private JTextField jtfDestination;
 	private JTextField jtfMount;
 	private JTextField jtfLocation;
+
+	public void setJtfNull()
+	{
+		jtfDestination.setText("");
+		jtfMount.setText("");
+		jtfLocation.setText("");
+	}
+
+
+	public char getCargoDestination()
+	{
+		return jtfDestination.getText().toCharArray()[0];
+	}
+
+	public int getMount()
+	{
+		int result;
+		String mount = jtfMount.getText();
+
+		//处理输入格式错误
+		try
+		{
+			result = Integer.parseInt(mount);
+		} catch (NumberFormatException e)
+		{
+			String title = "WRONG INPUT TYPE";
+			String content = "INPUT ERROR: You should input an integer.\nPlease input again.";
+			JOptionPane.showMessageDialog(null, content, title, JOptionPane.WARNING_MESSAGE);
+			return -1;
+		}
+
+		//处理输入数值错误
+		try
+		{
+			if (result <= 0||result > 7)
+				throw new Exception("INPUT ERROR: The Mount should be greater than 0 and " + "smaller than 8.\nPlease input again.");
+		} catch (Exception e)
+		{
+			String title = "WRONG INPUT VALUE";
+			JOptionPane.showMessageDialog(null, e.getMessage(), title, JOptionPane.WARNING_MESSAGE);
+			return -2;
+		}
+		System.out.println("Mount: " + result);
+		return result;
+	}
+
+	public char getCargoLocation()
+	{
+		return jtfLocation.getText().toCharArray()[0];
+	}
 
 	private JButton load;
 	private JButton unload;
@@ -52,10 +102,9 @@ public class MainFrame extends JFrame
 //		mount = new JLabel("Mount:");
 //		location = new JLabel("Location:");
 
-		jtfDestination = new JTextField("A", 5);
-		jtfMount = new JTextField("5", 5);
-		jtfLocation = new JTextField("A", 5);
-		//todo: delete default text
+		jtfDestination = new JTextField("", 5);
+		jtfMount = new JTextField("", 5);
+		jtfLocation = new JTextField("", 5);
 
 		jpl = new JPanel[9];
 		for (int i = 0; i < 9; i++)
@@ -89,14 +138,20 @@ public class MainFrame extends JFrame
 		//左侧完成
 
 		//右侧布局
-		PaintPanel ppr = new PaintPanel(f);
+		ppr = new PaintPanel(f);
 		spr = new ScrollPane(ScrollPane.SCROLLBARS_ALWAYS);
 		spr.add(ppr, BorderLayout.CENTER);
 		this.add(spr, BorderLayout.CENTER);
 
-		//todo: listener
 
 		this.validate();            //显示组件
+	}
+
+	@Override
+	public void validate()
+	{
+		super.validate();
+		if (ppr != null) ppr.repaint();
 	}
 
 

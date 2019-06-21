@@ -83,7 +83,7 @@ public class MainFrame extends JFrame
 	{
 		super(title);
 		this.setBounds(500,200,900,600);
-		this.setResizable(true);
+		this.setResizable(false);
 		this.setIconImage(icon.getImage());
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

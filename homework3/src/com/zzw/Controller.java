@@ -1,7 +1,11 @@
 package com.zzw;
 
-public class Controller
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Controller implements ActionListener
 {
+	//public Controller mainController;
 	private MainFrame frame;
 	private Freight freight;
 
@@ -9,14 +13,32 @@ public class Controller
 
 	public static void main(String[] args)
 	{
-		Controller c = new Controller();
+		new Controller();
 	}
+
+	/*private void start()
+	{
+		mainController = new Controller();
+	}*/
 
 	public Controller()
 	{
 		freight = new Freight(initialLength);
-		frame = new MainFrame("Freight Simulator", freight);
+		frame = new MainFrame("Freight Simulator", freight, this);
+	}
 
+	@Override
+	public void actionPerformed(ActionEvent e)
+	{
+		if (e.getActionCommand().equals("load"))
+		{
+			System.out.println("load");
+
+		} else if (e.getActionCommand().equals("unload"))
+		{
+			System.out.println("unload");
+
+		}
 
 	}
 }

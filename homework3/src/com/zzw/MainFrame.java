@@ -1,11 +1,13 @@
 package com.zzw;
 
+import com.zzw.Controller;
 import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame
 {
 	Freight f;
+	Controller actionReceiver;
 
 	static private final ImageIcon icon = new ImageIcon("./resource/title_cargo.jpg");
 
@@ -27,7 +29,7 @@ public class MainFrame extends JFrame
 	private JPanel[] jpl;
 
 
-	public MainFrame(String title, Freight f)
+	public MainFrame(String title, Freight f, Controller actionReceiver)
 	{
 		super(title);
 		this.setBounds(500,200,900,600);
@@ -37,9 +39,14 @@ public class MainFrame extends JFrame
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		this.f = f;
+		this.actionReceiver = actionReceiver;
 
 		load = new JButton("Load");
+		load.addActionListener(actionReceiver);
+		load.setActionCommand("load");
 		unload = new JButton("Unload");
+		unload.addActionListener(actionReceiver);
+		unload.setActionCommand("unload");
 
 //		destination = new JLabel("Destination:");
 //		mount = new JLabel("Mount:");

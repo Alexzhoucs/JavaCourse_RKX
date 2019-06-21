@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 
 public class Controller implements ActionListener
 {
-	//public Controller mainController;
 	private MainFrame frame;
 	private Freight freight;
 
@@ -15,11 +14,6 @@ public class Controller implements ActionListener
 	{
 		new Controller();
 	}
-
-	/*private void start()
-	{
-		mainController = new Controller();
-	}*/
 
 	public Controller()
 	{

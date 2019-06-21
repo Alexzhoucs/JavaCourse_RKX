@@ -98,10 +98,6 @@ public class MainFrame extends JFrame
 		unload.addActionListener(actionReceiver);
 		unload.setActionCommand("unload");
 
-//		destination = new JLabel("Destination:");
-//		mount = new JLabel("Mount:");
-//		location = new JLabel("Location:");
-
 		jtfDestination = new JTextField("", 5);
 		jtfMount = new JTextField("", 5);
 		jtfLocation = new JTextField("", 5);
@@ -114,21 +110,16 @@ public class MainFrame extends JFrame
 		jpl[1].add(jtfDestination);
 		jpl[2].add(mount);
 		jpl[2].add(jtfMount);
-		//jpl[3].setLayout(new FlowLayout(FlowLayout.CENTER));
 		jpl[3].add(load);
 		jpl[5].add(location);
 		jpl[5].add(jtfLocation);
-		//jpl[6].setLayout(new FlowLayout(FlowLayout.CENTER));
 		jpl[6].add(unload);
-
 
 		jpnl = new JPanel();
 		jpnl.setLayout(new GridLayout(9, 1));
 		for (int i = 0; i < 9; i++)
 			jpnl.add(jpl[i]);
 
-//		JPanel jpnlr = new JPanel();
-//		JLabel jl1 = new JLabel("");
 
 		spl = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED);
 		spl.add(jpnl, BorderLayout.CENTER);
@@ -143,7 +134,6 @@ public class MainFrame extends JFrame
 		spr.add(ppr, BorderLayout.CENTER);
 		this.add(spr, BorderLayout.CENTER);
 
-
 		this.validate();            //显示组件
 	}
 
@@ -153,7 +143,6 @@ public class MainFrame extends JFrame
 		super.validate();
 		if (ppr != null) ppr.repaint();
 	}
-
 
 	private class PaintPanel extends JPanel
 	{

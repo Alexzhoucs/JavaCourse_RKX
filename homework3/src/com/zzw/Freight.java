@@ -1,8 +1,8 @@
 package com.zzw;
 
-import java.util.Scanner;
+import org.jetbrains.annotations.Contract;
+
 import java.lang.Exception;
-import java.util.InputMismatchException;
 
 public class Freight
 {
@@ -28,39 +28,6 @@ public class Freight
 
 	void load(char destination, int mount)
 	{
-		// input the destination and the number.
-//		Scanner sc = new Scanner(System.in);
-//		boolean inputFlag;
-//		char destination;
-		//int mount = 0;
-//		System.out.println("开始装载操作！");
-//		System.out.print("请输入货物目的地：");
-//		destination = sc.next().toCharArray()[0];
-//		System.out.println("读取目的地为：" + destination);        //继续IO
-
-
-//		System.out.print("请输入货物数量：");
-//		do
-//		{
-//			inputFlag = false;
-//			try
-//			{
-//				if (mount <= 0||mount > 7) throw new Exception("输入错误：数量应在1-7间。");
-//			} catch (InputMismatchException e)
-//			{
-//				System.out.println("输入错误：请输入整数！");
-//				System.out.print("请重新输入：");
-////				sc = new Scanner(System.in);
-//				inputFlag = true;
-//			} catch (Exception e)
-//			{
-//				System.out.println(e.getMessage());
-//				System.out.print("请重新输入：");
-//				inputFlag = true;
-//			}
-//		} while (inputFlag);                    //交互完成
-		//System.out.println(mount);
-
 		if (mount >= 4)                            //处理整车负载
 		{
 			boolean findFlag = false;
@@ -138,13 +105,6 @@ public class Freight
 
 	void unload(char destination)
 	{
-	/*	//IO
-		Scanner sc = new Scanner(System.in);
-		System.out.println("开始卸载操作！");
-		System.out.print("请输入当前地址：");
-		char destination = sc.next().toCharArray()[0];
-		System.out.println("读取当前地址为：\t" + destination);*/
-
 		//arithmetic
 		Car c = firstCar;
 		Car last = null;
@@ -241,7 +201,7 @@ public class Freight
 			this.next = new Car(n - 1);
 		}
 
-		//	@Contract(pure = true)
+		@Contract(pure = true)
 		private int getWeight()
 		{
 			return weight;
@@ -252,9 +212,6 @@ public class Freight
 			// add new data to cargo; throws exception when the data is too big.
 			if (data.length > (4 - this.weight)) {throw new Exception("ERROR in Freight - Car.add(char[]): 添加数据过大");}
 
-
-//			for(int i = 0;i < data.length;i++)
-//				cargo[weight + i] = data[i];
 			System.arraycopy(data, 0, cargo, weight, data.length);
 
 			weight += data.length;
